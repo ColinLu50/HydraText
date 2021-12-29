@@ -1,0 +1,46 @@
+# query
+pr = get_attack_result([new_text], premise, predictor, orig_label, batch_size)
+if np.sum(pr) > 0: # success
+
+# sim
+semantic_sims = calc_sim(text_ls, [new_text], -1, sim_score_window, sim_predictor)
+random_sim = calc_sim(text_ls, [random_text], -1, sim_score_window, sim_predictor)[0]
+
+# filtered out by POS
+synonyms_pos_ls = [criteria.get_pos(new_text[max(rand_idx - 4, 0):rand_idx + 5])[min(4, rand_idx)]
+                           if len(new_text) > 10 else criteria.get_pos(new_text)[rand_idx] for new_text in new_texts]
+pos_mask = np.array(criteria.pos_filter(pos_ls[rand_idx], synonyms_pos_ls))
+
+return:
+new_text, num_changed, random_changed, orig_label, new_label, num_queries, sim, random_sim
+
+
+CUDA_VISIBLE_DEVICES=3 python3 classification_attack_MO_try_init.py  > ./out/outfiles/IMDB_BERT_MO_soft_init.out 2>&1 &
+CUDA_VISIBLE_DEVICES=1 python3 classification_attack_MO_try_init.py  > ./out/outfiles/IMDB_BERT_MO_rnd_init.out 2>&1 &
+
+
+# ============================ Models ====================================
+# BERT:
+    - imdb:  90.93%
+
+
+# Infersent SNLI
+finalgrep : accuracy valid : 84.08859987807357
+finalgrep : accuracy test : 83.44%
+
+# ESIM
+SNLI: 86.12% (85.3420% raw)
+
+# BERT:
+run_classifer.py
+https://github.com/ethanjperez/pytorch-pretrained-BERT/blob/master/examples/run_classifier.py
+run_glue.py # for now
+https://github.com/huggingface/transformers/blob/04e25c62863c9b5e7523ad95778a8b5fa709244d/examples/pytorch/text-classification/run_glue.py
+
+
+# ================================ Datasets ======================================
+SNLI: 2719 samples' hypo [10, 100]
+
+============ TMP ===============
+
+
