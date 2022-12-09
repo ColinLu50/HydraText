@@ -1,4 +1,4 @@
-# HydraText: Rethinking the Objectives in Adversarial Textual Attack
+# Effective and Imperceptible Adversarial Textual Attack via Multi-objectivization
 
 ## Requirements
 
